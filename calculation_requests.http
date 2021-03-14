@@ -1,0 +1,6 @@
+# ( ( 1 + 3 ) / 2 )
+GET http://localhost:5000/calculate?calculation=(%20(%201%20%2B%203%20)%20%2F%202%20)&notation=infix
+
+###
+# / + 1 3 2
+GET http://localhost:5000/calculate?calculation=%2F%20%2B%201%203%202&notation=prefix
