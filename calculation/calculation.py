@@ -20,6 +20,8 @@ class UnknownNotation(Exception):
 def get_resolve_method(notation: str) -> Callable[[List[str]], Tuple[int, List[str]]]:
     if notation == 'prefix':
         return resolve_prefix_calculation
+    if notation == 'infix':
+        return resolve_infix_calculation
     raise UnknownNotation(notation)
 
 
@@ -29,4 +31,14 @@ def resolve_prefix_calculation(calculation_elements: List[str]) -> Tuple[int, Li
         first_operand, rest = resolve_prefix_calculation(rest)    
         second_operand, rest = resolve_prefix_calculation(rest)
         return OPERATORS[next_element](first_operand, second_operand), rest
+    return int(next_element), rest
+
+def resolve_infix_calculation(calculation_elements: List[str]) -> Tuple[int, List[str]]:
+    next_element, *rest = calculation_elements
+    if next_element == '(':
+        first_operand, rest = resolve_infix_calculation(rest)
+        operator, *rest = rest
+        second_operand, rest = resolve_infix_calculation(rest)
+        closing_bracket, *rest = rest
+        return OPERATORS[operator](first_operand, second_operand), rest
     return int(next_element), rest
