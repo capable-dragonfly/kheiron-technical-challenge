@@ -1,4 +1,6 @@
 # kheiron-technical-challenge
+This project requires Python 3.6+
+
 Code for the Kheiron take home technical challenge.
 
 To install requirements: `pip install -r requirements.txt`
